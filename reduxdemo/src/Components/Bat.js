@@ -8,14 +8,21 @@ function Bat(props) {
             {/* <h2>Bats : {bats}</h2> */}
             <h2>Bats : {props.bats}</h2>
             {/* <button onClick={()=>setBats(bats-1)}>Buy Bat</button> */}
+            <button onClick={()=>props.buyBat()}>Buy Bat</button>
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return{
-        bats : state.bats
+        bats : state.bat.bats
     }
 }
 
-export default connect(mapStateToProps)(Bat)
+const mapDispatchToProps = (dispatch) => {
+    return{
+        buyBat :  () => dispatch({type:"BUY_BAT"})
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Bat)
