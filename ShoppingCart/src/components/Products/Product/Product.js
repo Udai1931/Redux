@@ -36,7 +36,7 @@ function Product2({ product, addToCart, loadCurrentItem }) {
       // history.push({
       //   pathname:`/product/${product.id}`,
       //   state: product
-      // })
+      // }) 
     }
     return (
         <Card className={classes.root}>
