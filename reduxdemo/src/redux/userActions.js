@@ -23,13 +23,12 @@ export const fetchFailed = (error) => {
 export const getUsers = () => {
     return async(dispatch) => {
         dispatch(fetchUsers());
-        console.log("ajcsjkdbcs,c")
         try{
-            let res = await axios.get('https://jsonplaceholder.typicode.com/users');
+            let res = await axios.get('https://jsonplaceholder.typicode.com/user');
             let data = res.data;
             dispatch(fetchSuccess(data))
         }catch(error){
-            dispatch(fetchFailed(error))
+            dispatch(fetchFailed(error.message))
         }
     }
 }
