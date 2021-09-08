@@ -5,8 +5,10 @@ import educationReducer from './educationReducer';
 import authReducer from './authReducer';
 import {firestoreReducer} from 'redux-firestore';
 import {firebaseReducer} from 'react-redux-firebase';
+import initialState from './initialState.json';
+import * as actionTypes from '../actions/actionTypes';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     auth:authReducer,
     firestore:firestoreReducer,
     firebase:firebaseReducer,
@@ -15,4 +17,11 @@ const rootReducer = combineReducers({
     education : educationReducer,
 })
 
-export default rootReducer
+const rootReducer = (state=initialState,action) => {
+    if(action.type==actionTypes.SIGN_OUT){
+        state=undefined
+    }
+    return appReducer(state,action)
+} 
+
+export default rootReducer;

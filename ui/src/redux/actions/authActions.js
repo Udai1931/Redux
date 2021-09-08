@@ -84,7 +84,7 @@ export const register = (userData) => {
 export function signout(){
     return (dispatch,getState,{getFirebase,getFirestore}) => {
         const firebase = getFirebase();
-        firebase.auth.signOut().then(()=>{
+        firebase.auth().signOut().then(()=>{
             dispatch({type:actionTypes.SIGN_OUT})
         }).catch((err)=>{
             dispatch({type:actionTypes.SIGN_OUT_FAILED,error:err})
