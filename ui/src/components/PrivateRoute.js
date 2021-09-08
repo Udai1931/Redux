@@ -11,6 +11,7 @@ function PrivateRoute({component:Component,...remainingProps}){
             isLoaded(authFirebase) && !isEmpty(authFirebase) ? 
             (<Component {...props}/>):(<Redirect to='/'/>)
         }
+        />
     )
 }
 
