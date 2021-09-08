@@ -7,6 +7,8 @@ import {skinCodes, fieldCd} from './../../constants/typeCodes';
 // import * as educationActions from '../../actions/educationActions';
 // import {bindActionCreators} from 'redux';
 import { useHistory } from "react-router-dom";
+import * as educationActions from '../../redux/actions/educationActions';
+import {connect} from 'react-redux';
 
 function Education(props) {
   console.log('Education');
@@ -25,12 +27,12 @@ function Education(props) {
     return "";
 }
   const onSubmit = async(e) => {
-    //console.log(this.state.educationSection);
-    // if(props.educationSection!=null){
-    //     props.updateEducation(props.document.id,education);
-    // }else{
-    //     props.addEducation(props.document.id,education);
-    // }
+    // console.log(this.state.educationSection);
+    if(props.educationSection!=null){
+        props.updateEducation(education);
+    }else{
+        props.addEducation(education);
+    }
      history.push('/finalize')
   }
 
@@ -98,9 +100,20 @@ function Education(props) {
   }
 
 
-
+const mapStateToProps = (state) => {
+  return{
+    contactSection : state.contact,
+    educationSection : state.education,
+    document : state.document
+  }
+}
   
+const mapDispatchToProps = (dispatch) => {
+  return{
+    addEducation : (education) => dispatch(educationActions.add(education)),
+    updateEducation : (education) => dispatch(educationActions.update(education))
+  }
+}
 
-
-export default Education
+export default connect(mapStateToProps,mapDispatchToProps)(Education);
 
