@@ -2,6 +2,8 @@ import React from 'react';
 import logo from "../../static/images/resume.png";
 import { NavLink } from "react-router-dom";
 const Lp = () => {
+    const ele = React.createElement('div');
+    console.log(ele)
     return (    
     
         <div className="container  lp-page center">          
