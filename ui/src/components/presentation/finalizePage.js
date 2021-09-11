@@ -3,15 +3,16 @@ import ResumePreview from './resumePreview'
 import  jsPDF  from "jspdf";
 import html2canvas from 'html2canvas';
 import {connect} from 'react-redux';
-import { firestoreConnect } from "react-redux-firebase";
+import { useFirestore } from "react-redux-firebase";
 
    function Finalize(props) {
+     const firestore = useFirestore();
     let educationSection= props.educationSection
     let contactSection=props.contactSection
     let document=props.document
   
     const saveToDatabase= async()=>{
-      let user = await firestoreConnect.collection('users').doc(props.auth.uid).get();
+      let user = await firestore.collection('users').doc(props.auth.uid).get();
       user = user.data()
       let newObj = null
       if(user.resumeIds!=undefined){
@@ -19,7 +20,7 @@ import { firestoreConnect } from "react-redux-firebase";
       }else{
         newObj = {[document.id]:{educationSection:educationSection,contactSection:contactSection,document:document}}
       }
-      await firestoreConnect.collection('users').doc(props.auth.uid).update({
+      await firestore.collection('users').doc(props.auth.uid).update({
         resumeIds:newObj
       })
     }
